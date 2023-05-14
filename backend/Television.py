@@ -40,3 +40,9 @@ class Television:
         
     def get_volume_level(self) -> int:
         return self.volume_level
+
+    def set_volume_level(self, volume_level: int) -> None:
+        try:
+            self.volume_level = int(volume_level)
+        except:
+            raise ValueError("Volume level must be an integer.")  
