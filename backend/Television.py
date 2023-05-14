@@ -28,3 +28,6 @@ class Television:
 
     def tv(self) -> str:
         return f"This TV's channel is on {self.channel}; volume level is at {self.volume_level}; and TV state is {'on' if self.on else 'off'}"
+
+    def get_channel(self) -> int:
+        return self.channel
