@@ -52,3 +52,6 @@ class Television:
 
     def channel_up(self) -> None:
         self.channel += self.CHANNEL_DELTA
+
+    def channel_down(self) -> None:
+        self.channel -= self.CHANNEL_DELTA
