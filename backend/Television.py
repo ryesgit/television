@@ -37,3 +37,6 @@ class Television:
             self.channel = int(channel)
         except:
             raise ValueError("Channel must be an integer.")
+        
+    def get_volume_level(self) -> int:
+        return self.volume_level
