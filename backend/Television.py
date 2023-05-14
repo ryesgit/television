@@ -8,3 +8,9 @@ Accepts three arguments:
 - On > The instance's initial on state. Is a boolean
 
 '''
+
+class Television:
+    def __init__(self, channel:int, volume_level:int, on:bool) -> None:
+        self.channel = channel
+        self.volume_level = volume_level
+        self.on = on
