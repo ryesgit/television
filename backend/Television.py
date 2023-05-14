@@ -10,6 +10,9 @@ Accepts three arguments:
 '''
 
 class Television:
+    
+    CHANNEL_DELTA = 1 
+
     def __init__(self, channel:int, volume_level:int, on:bool) -> None:
         try:
             channel = int(channel)
@@ -45,4 +48,7 @@ class Television:
         try:
             self.volume_level = int(volume_level)
         except:
-            raise ValueError("Volume level must be an integer.")  
+            raise ValueError("Volume level must be an integer.")
+
+    def channel_up(self) -> None:
+        self.channel += self.CHANNEL_DELTA
