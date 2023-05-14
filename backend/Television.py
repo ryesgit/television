@@ -11,7 +11,8 @@ Accepts three arguments:
 
 class Television:
     
-    CHANNEL_DELTA = 1 
+    CHANNEL_DELTA = 1
+    VOLUME_DELTA = 10
 
     def __init__(self, channel:int, volume_level:int, on:bool) -> None:
         try:
@@ -55,3 +56,6 @@ class Television:
 
     def channel_down(self) -> None:
         self.channel -= self.CHANNEL_DELTA
+
+    def volume_up(self) -> None:
+        self.volume_level += self.VOLUME_DELTA
