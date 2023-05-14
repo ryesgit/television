@@ -59,3 +59,6 @@ class Television:
 
     def volume_up(self) -> None:
         self.volume_level += self.VOLUME_DELTA
+
+    def volume_down(self) -> None:
+        self.volume_level -= self.VOLUME_DELTA
