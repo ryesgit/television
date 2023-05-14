@@ -31,3 +31,9 @@ class Television:
 
     def get_channel(self) -> int:
         return self.channel
+    
+    def set_channel(self, channel:int) -> None:
+        try:
+            self.channel = int(channel)
+        except:
+            raise ValueError("Channel must be an integer.")
