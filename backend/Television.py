@@ -15,10 +15,13 @@ class Television:
             channel = int(channel)
             volume_level = int(volume_level)
             on = bool(on)
-            
+
         except ValueError:
             raise ValueError("Invalid input. Channel must be an integer, volume level must be an integer, and on must be a boolean value.")
         
         self.channel = channel
         self.volume_level = volume_level
         self.on = on
+    
+    def switch(self):
+        self.on = not self.on
