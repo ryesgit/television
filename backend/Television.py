@@ -22,14 +22,17 @@ class Television:
     VOLUME_MAX = 100
     VOLUME_MIN = 0
 
-    def __init__(self, channel:int, volume_level:int, on:bool) -> None:
+    def __init__(self, channel:int, volume_level:int, on:bool, id:str='') -> None:
         try:
+            if id == '':
+                raise ValueError("ID must not be empty.")
+            id = str(id)
             channel = int(channel)
             volume_level = int(volume_level)
             on = bool(on)
 
         except ValueError:
-            raise ValueError("Invalid input. Channel must be an integer, volume level must be an integer, and on must be a boolean value.")
+            raise ValueError("Invalid input. ID must not be empty, channel must be an integer, volume level must be an integer, and on must be a boolean value.")
         
         self.channel = channel
         self.volume_level = volume_level
