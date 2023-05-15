@@ -58,9 +58,13 @@ class Television:
         try:
             if volume_level < self.VOLUME_MIN or volume_level > self.VOLUME_MAX:
                 raise ValueError("Channel must be within minimum and maximum only.")
+
+            if volume_level % 10 != 0:
+                raise ValueError("Volume level input must be a multiple of 10")
+
             self.volume_level = int(volume_level)
         except:
-            raise ValueError(f"Volume level must be an integer and must be within {self.VOLUME_MIN} and {self.VOLUME_MAX} only.")
+            raise ValueError(f"Volume level must be an integer that is a multiple of 10 and must be within {self.VOLUME_MIN} and {self.VOLUME_MAX} only.")
 
     def channel_up(self) -> None:
         self.channel += self.CHANNEL_DELTA
