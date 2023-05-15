@@ -45,9 +45,11 @@ class Television:
     
     def set_channel(self, channel:int) -> None:
         try:
+            if channel < self.CHANNEL_MIN or channel > self.CHANNEL_MAX:
+                raise ValueError("Channel must be within minimum and maximum only.")
             self.channel = int(channel)
         except:
-            raise ValueError("Channel must be an integer.")
+            raise ValueError(f"Channel must be an integer and must be within {self.CHANNEL_MIN} to {self.CHANNEL_MAX} only.")
         
     def get_volume_level(self) -> int:
         return self.volume_level
