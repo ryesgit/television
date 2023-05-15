@@ -9,6 +9,7 @@ const Television = ({channel:channelVideoID, id, className}) => {
   const [on, setOn] = useState(true);
   const [opts, setOpts] = useState({});
   const [player, setPlayer] = useState();
+  const [info, setInfo] = useState('');
 
   useEffect(() => {
     const opts = {
@@ -72,8 +73,17 @@ const Television = ({channel:channelVideoID, id, className}) => {
       console.log(player);
       player.loadVideoById(channel);
     }
-    
+
   }, [channel])
+
+  // Everytime anything changes, change TV info
+  useEffect(() => {
+
+    (async() => {
+      const info = await getTVInfo()
+      setInfo(info);
+    })();
+  }, [channel, volume, on])
 
   // Everytime volume changes, reset player volume.
   useEffect(() => {
@@ -130,10 +140,21 @@ const Television = ({channel:channelVideoID, id, className}) => {
         alert(err.toString());
     }
   }
+
+  const getTVInfo = async() => {
+    try {
+      const res = await fetch(`${baseURL}/televisions/${id}/info`);
+      const info = await res.json();
+      return info
+    } catch(err) {
+        alert(err.toString());
+    } 
+  }
+
   return (
     <>
-        <aside className={className + ' p-4 bg-black md:w-1/2 flex flex-col m-0 mx-auto'}>
-
+        <aside className={className + `relative p-4 bg-black md:w-1/2 flex z-0 flex-col m-0 mx-auto`}>
+            <p className='absolute z-10 text-white'>{info}</p>
             {/* Toggles power button background color */}
             { on ? <YouTube iframeClassName=' grow' className=' flex flex-col justify-center' title={channel} videoId={channel} opts={opts} onReady={(event) => setPlayer(event.target)} /> : <div style={{ width: '100%', height: '200px', background: 'gray' }} /> }
 

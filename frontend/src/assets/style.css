@@ -663,6 +663,14 @@ video {
   isolation: auto;
 }
 
+.z-10 {
+  z-index: 10;
+}
+
+.z-0 {
+  z-index: 0;
+}
+
 .float-right {
   float: right;
 }
@@ -2092,6 +2100,11 @@ video {
   color: rgb(59 130 246 / var(--tw-text-opacity));
 }
 
+.text-white {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
 .underline {
   text-decoration-line: underline;
 }
@@ -2459,6 +2472,26 @@ video {
       max-width: 1536px;
     }
   }
+}
+
+.before\:absolute::before {
+  content: var(--tw-content);
+  position: absolute;
+}
+
+.before\:content-\[\$\{info\}\]::before {
+  --tw-content: ${info};
+  content: var(--tw-content);
+}
+
+.before\:content-\[\'\$\{info\}\'\]::before {
+  --tw-content: '${info}';
+  content: var(--tw-content);
+}
+
+.before\:content-\[\'Hello\'\]::before {
+  --tw-content: 'Hello';
+  content: var(--tw-content);
 }
 
 .hover\:font-bold:hover {

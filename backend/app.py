@@ -117,3 +117,12 @@ def switch_on_off_tv(id):
     tv.switch()
 
     return jsonify(tv.on), 200
+
+@app.route('/televisions/<id>/info')
+def brief(id):
+    tv: Television
+    tv = televisions[id]
+    # Gets the tv information
+    info = tv.tv()
+
+    return jsonify(info), 200 
