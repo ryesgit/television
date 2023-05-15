@@ -3,10 +3,10 @@ import { useEffect, useState } from 'react'
 import YouTube from "react-youtube";
 import { baseURL } from '../locals/constants.js';
 
-const Television = ({channel:channelVideoID, id, className}) => {
+const Television = ({channel:channelVideoID, id, className, on: tvInitialOnState}) => {
   const [volume, setVolume] = useState(100);
   const [channel, setChannel] = useState(channelVideoID);
-  const [on, setOn] = useState(true);
+  const [on, setOn] = useState(tvInitialOnState);
   const [opts, setOpts] = useState({});
   const [player, setPlayer] = useState();
   const [info, setInfo] = useState('');
@@ -39,9 +39,8 @@ const Television = ({channel:channelVideoID, id, className}) => {
     } catch(err) {
         alert(err.toString());
     }
-    if(player.isMuted()) {
-      player.unMute()
-    }
+
+    unmutePlayer()
   }
   
   const channelDown = async() => {
@@ -59,18 +58,21 @@ const Television = ({channel:channelVideoID, id, className}) => {
     } catch(err) {
         alert(err.toString());
     }
+
+    unmutePlayer()
+  }
+
+  const unmutePlayer = () => {
     if(player.isMuted()) {
       player.unMute()
     }
   }
+
   
   useEffect(() => {
     if (!player || !channel) {
       return
     } else {
-      console.log(!player);
-      console.log(channel)
-      console.log(player);
       player.loadVideoById(channel);
     }
 
@@ -96,6 +98,9 @@ const Television = ({channel:channelVideoID, id, className}) => {
 
   const volumeUp = async() => {
     try {
+
+      unmutePlayer()
+
       const res = await fetch(`${baseURL}/televisions/volume/${id}/up`);
       if(res.status == 405) {
         alert("Can no longer increase volume");
@@ -111,9 +116,9 @@ const Television = ({channel:channelVideoID, id, className}) => {
   }
 
   const volumeDown = async() => {
-    if(player.isMuted()) {
-      player.unMute()
-    }
+
+    unmutePlayer()
+
     try {
       const res = await fetch(`${baseURL}/televisions/volume/${id}/down`);
       if(res.status == 405) {
@@ -154,9 +159,9 @@ const Television = ({channel:channelVideoID, id, className}) => {
   return (
     <>
         <aside className={className + `relative p-4 bg-black md:w-1/2 flex z-0 flex-col m-0 mx-auto`}>
-            <p className='absolute z-10 text-white'>{info}</p>
+            <p className='absolute z-10 text-white bg-black'>{info}</p>
             {/* Toggles power button background color */}
-            { on ? <YouTube iframeClassName=' grow' className=' flex flex-col justify-center' title={channel} videoId={channel} opts={opts} onReady={(event) => setPlayer(event.target)} /> : <div className=' h-full' style={{ width: '100%', background: 'gray' }} /> }
+            { on ? <YouTube iframeClassName=' grow' className=' flex flex-col justify-center' title={channel} videoId={channel} opts={opts} onReady={(event) => setPlayer(event.target)} /> : <div className=' grow h-60' style={{ width: '100%', background: 'gray' }} /> }
 
             <div className=' flex grow justify-center items-center pt-2 text-xs flex-wrap m-1'>
 

@@ -36,7 +36,8 @@ def get_all_tv():
         tv_info = {
             "channel": value.get_channel(),
             "volume_level": value.get_volume_level(),
-            "id": value.id
+            "id": value.id,
+            "on": value.on
         }
 
         all_tv_info.append(tv_info)
@@ -47,13 +48,14 @@ def get_all_tv():
 def create_tv():
     global televisions
 
-    tv = Television(1, 0, False, uuid4())
+    tv = Television(1, 0, True, uuid4())
     televisions[tv.id] = tv
 
     tv_info = {
         "channel": tv.get_channel(),
         "volume_level": tv.get_volume_level(),
-        "id": tv.id
+        "id": tv.id,
+        "on": tv.on
     }
 
     return jsonify(tv_info), 200
