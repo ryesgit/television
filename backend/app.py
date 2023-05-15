@@ -57,3 +57,12 @@ def create_tv():
     }
 
     return jsonify(tv_info), 200
+
+@app.route('/televisions/channel/<id>/up')
+def increase_tv_channel(id):
+    print(id)
+    tv: Television
+    tv = televisions[id]
+    tv.channel_up()
+
+    return jsonify(tv.get_channel()), 200
