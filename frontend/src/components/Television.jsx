@@ -25,10 +25,37 @@ const Television = ({channel:channelVideoID, id}) => {
   }, []);
 
   const channelUp = async() => {
-    const res = await fetch(`${baseURL}/televisions/channel/${id}/up`);
-    const newChannel = await res.json();
-    console.log(newChannel[1]);
-    setChannel(newChannel[1]);
+    try {
+      const res = await fetch(`${baseURL}/televisions/channel/${id}/up`);
+      if(res.status == 405) {
+        alert("You have reached the end of channels");
+        return
+      }
+      const newChannel = await res.json();
+
+
+      console.log(newChannel[1]);
+      setChannel(newChannel[1]);
+    } catch(err) {
+        alert(err.toString());
+    }
+  }
+  
+  const channelDown = async() => {
+    try {
+      const res = await fetch(`${baseURL}/televisions/channel/${id}/down`);
+      if(res.status == 405) {
+        alert("You have reached the end of channels");
+        return
+      }
+      const newChannel = await res.json();
+
+
+      console.log(newChannel[1]);
+      setChannel(newChannel[1]);
+    } catch(err) {
+        alert(err.toString());
+    }
   }
   
   useEffect(() => {
@@ -52,7 +79,7 @@ const Television = ({channel:channelVideoID, id}) => {
                 <button>Volume Up</button>
                 <button>Volume Down</button>
                 <button onClick={channelUp}>Channel Up</button>
-                <button>Channel Down</button>
+                <button onClick={channelDown}>Channel Down</button>
 
                 <label htmlFor="power" className={`${ !on ? 'bg-red-700' : 'bg-green-700' } p-2 rounded-md cursor-pointer`} onClick={() => setOn(!on)}>Power Button</label>
                 <input type="checkbox" name="power-button" id="power" className=" appearance-none"/>

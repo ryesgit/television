@@ -60,9 +60,26 @@ def create_tv():
 
 @app.route('/televisions/channel/<id>/up')
 def increase_tv_channel(id):
-    print(id)
-    tv: Television
-    tv = televisions[id]
-    tv.channel_up()
+    try:
+        print(id)
+        tv: Television
+        tv = televisions[id]
+        tv.channel_up()
 
-    return jsonify(tv.get_channel()), 200
+        return jsonify(tv.get_channel()), 200
+
+    except IndexError:
+        return jsonify(f"You can not go past over {tv.CHANNEL_MAX}!"), 405
+
+@app.route('/televisions/channel/<id>/down')
+def decrease_tv_channel(id):
+    try:
+        print(id)
+        tv: Television
+        tv = televisions[id]
+        tv.channel_down()
+
+        return jsonify(tv.get_channel()), 200
+
+    except IndexError:
+        return jsonify(f"You can not go past down {tv.CHANNEL_MIN}!"), 405
