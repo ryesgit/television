@@ -11,6 +11,7 @@ Objects are called on user demand.
 from Television import Television
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+from uuid import uuid4
 
 app = Flask(__name__)
 CORS(app)
@@ -40,3 +41,19 @@ def get_all_tv():
 
         all_tv_info.append(tv_info)
     return jsonify(all_tv_info), 200
+
+# Create new TV and return newly created instance
+@app.route('/televisions/create')
+def create_tv():
+    global televisions
+
+    tv = Television(1, 0, False, uuid4())
+    televisions[tv.id] = tv
+
+    tv_info = {
+        "channel": tv.get_channel(),
+        "volume_level": tv.get_volume_level(),
+        "id": tv.id
+    }
+
+    return jsonify(tv_info), 200

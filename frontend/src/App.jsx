@@ -15,6 +15,13 @@ function App() {
     })();
 
   }, []);
+
+  const createNewTV = async() => {
+    const res = await fetch('http://127.0.0.1:5000/televisions/create');
+    const newTv = await res.json();
+    setTelevisions(prev => [...prev, newTv]);
+  }
+
   return (
     <>
       <main className=' flex flex-col h-screen w-screen justify-center items-center'>
@@ -24,7 +31,7 @@ function App() {
             return <Television channel={television.channel[1]}/>
           })
         }
-        <button className=' bg-slate-900 p-2'>Add Television Instance</button>
+        <button className=' bg-slate-900 p-2' onClick={createNewTV}>Add Television Instance</button>
         
       </main>
     </>
