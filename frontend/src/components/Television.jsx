@@ -67,6 +67,34 @@ const Television = ({channel:channelVideoID, id}) => {
     }
   }, [channel])
 
+  // Everytime volume changes, reset player volume.
+  useEffect(() => {
+    if (!player) {
+      return
+    } else {
+      player.setVolume(volume)
+    }
+  }, [volume])
+
+  const volumeUp = async() => {
+    if(player.isMuted()) {
+      player.unMute()
+    }
+    try {
+      const res = await fetch(`${baseURL}/televisions/volume/${id}/up`);
+      if(res.status == 405) {
+        alert("Can no longer increase volume");
+        return
+      }
+      const newVolume = await res.json();
+
+      setVolume(newVolume);
+    } catch(err) {
+        alert(err.toString());
+    }
+
+  }
+
   return (
     <>
         <aside className=' p-4 bg-black md:w-1/2 flex flex-col m-0 mx-auto'>
@@ -76,7 +104,7 @@ const Television = ({channel:channelVideoID, id}) => {
 
             <div className=' flex justify-around items-center pt-2 text-xs flex-wrap'>
                 <p>{channel}</p>
-                <button>Volume Up</button>
+                <button onClick={volumeUp}>Volume Up</button>
                 <button>Volume Down</button>
                 <button onClick={channelUp}>Channel Up</button>
                 <button onClick={channelDown}>Channel Down</button>

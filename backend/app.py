@@ -83,3 +83,16 @@ def decrease_tv_channel(id):
 
     except IndexError:
         return jsonify(f"You can not go past down {tv.CHANNEL_MIN}!"), 405
+
+@app.route('/televisions/volume/<id>/up')
+def increase_tv_volume(id):
+    try:
+        print(id)
+        tv: Television
+        tv = televisions[id]
+        tv.volume_up()
+
+        return jsonify(tv.get_volume_level()), 200
+
+    except ValueError:
+        return jsonify(f"You can not go past over {tv.VOLUME_MAX}!"), 405
