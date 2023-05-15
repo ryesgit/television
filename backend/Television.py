@@ -10,7 +10,8 @@ Accepts three arguments:
 '''
 
 class Television:
-    
+    # Just some random YouTube video IDs to be used as "channels"
+    CHANNELS = ['dQw4w9WgXcQ', 'djV11Xbc914', 'g5hdwHlCB9U', 'm9qdS4SeRHE', 'b3g4n0tPpHo', 'dQw4w9WgXcQ', 'djV11Xbc914', 'g5hdwHlCB9U', 'm9qdS4SeRHE', 'b3g4n0tPpHo']
     CHANNEL_DELTA = 1
     VOLUME_DELTA = 10
 
@@ -41,7 +42,7 @@ class Television:
         return f"This TV's channel is on {self.channel}; volume level is at {self.volume_level}; and TV state is {'on' if self.on else 'off'}"
 
     def get_channel(self) -> int:
-        return self.channel
+        return [self.channel, self.CHANNELS[self.channel - 1]]
     
     def set_channel(self, channel:int) -> None:
         try:
