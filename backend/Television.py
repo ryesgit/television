@@ -14,6 +14,13 @@ class Television:
     CHANNEL_DELTA = 1
     VOLUME_DELTA = 10
 
+    # Volume and channel minimum and maximum
+    CHANNEL_MAX = 10
+    CHANNEL_MIN = 1
+
+    VOLUME_MAX = 100
+    VOLUME_MIN = 0
+
     def __init__(self, channel:int, volume_level:int, on:bool) -> None:
         try:
             channel = int(channel)
