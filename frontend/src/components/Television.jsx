@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react'
 
 import YouTube from "react-youtube";
 
-const Television = () => {
+const Television = ({channel:channelVideoID}) => {
   const [volume, setVolume] = useState(100);
-  const [channel, setChannel] = useState('LaBY6Jdhu5Q');
+  const [channel, setChannel] = useState(channelVideoID);
   const [on, setOn] = useState(true);
   const [opts, setOpts] = useState({});
   useEffect(() => {
