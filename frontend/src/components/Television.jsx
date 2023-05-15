@@ -9,7 +9,7 @@ const Television = () => {
   const [opts, setOpts] = useState({});
   useEffect(() => {
     const opts = {
-      height: '390',
+      height: '200',
       width: '100%',
       playerVars: {
         // https://developers.google.com/youtube/player_parameters
@@ -23,12 +23,12 @@ const Television = () => {
 
   return (
     <>
-        <aside className=' p-4 bg-black'>
+        <aside className=' p-4 bg-black md:w-1/2 flex flex-col m-0 mx-auto'>
 
             {/* Toggles power button background color */}
-            { on ? <YouTube videoId={channel} opts={opts}/> : <div style={{ width: '100%', height: '390px', background: 'gray' }} /> }
+            { on ? <YouTube videoId={channel} opts={opts}/> : <div style={{ width: '100%', height: '200px', background: 'gray' }} /> }
 
-            <div className=' flex justify-around items-center pt-2'>
+            <div className=' flex justify-around items-center pt-2 text-xs flex-wrap'>
                 <button>Volume Up</button>
                 <button>Volume Down</button>
                 <button>Channel Up</button>
@@ -43,4 +43,4 @@ const Television = () => {
   )
 }
 
-export default Television
+export default Television;
