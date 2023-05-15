@@ -39,6 +39,9 @@ const Television = ({channel:channelVideoID, id}) => {
     } catch(err) {
         alert(err.toString());
     }
+    if(player.isMuted()) {
+      player.unMute()
+    }
   }
   
   const channelDown = async() => {
@@ -56,6 +59,9 @@ const Television = ({channel:channelVideoID, id}) => {
     } catch(err) {
         alert(err.toString());
     }
+    if(player.isMuted()) {
+      player.unMute()
+    }
   }
   
   useEffect(() => {
@@ -65,6 +71,7 @@ const Television = ({channel:channelVideoID, id}) => {
       console.log(channel)
       player.loadVideoById(channel, 5);
     }
+    
   }, [channel])
 
   // Everytime volume changes, reset player volume.
@@ -77,13 +84,29 @@ const Television = ({channel:channelVideoID, id}) => {
   }, [volume])
 
   const volumeUp = async() => {
-    if(player.isMuted()) {
-      player.unMute()
-    }
     try {
       const res = await fetch(`${baseURL}/televisions/volume/${id}/up`);
       if(res.status == 405) {
         alert("Can no longer increase volume");
+        return
+      }
+      const newVolume = await res.json();
+
+      setVolume(newVolume);
+    } catch(err) {
+        alert(err.toString());
+    }
+
+  }
+
+  const volumeDown = async() => {
+    if(player.isMuted()) {
+      player.unMute()
+    }
+    try {
+      const res = await fetch(`${baseURL}/televisions/volume/${id}/down`);
+      if(res.status == 405) {
+        alert("Can no longer decrease volume");
         return
       }
       const newVolume = await res.json();
@@ -105,7 +128,7 @@ const Television = ({channel:channelVideoID, id}) => {
             <div className=' flex justify-around items-center pt-2 text-xs flex-wrap'>
                 <p>{channel}</p>
                 <button onClick={volumeUp}>Volume Up</button>
-                <button>Volume Down</button>
+                <button onClick={volumeDown}>Volume Down</button>
                 <button onClick={channelUp}>Channel Up</button>
                 <button onClick={channelDown}>Channel Down</button>
 
