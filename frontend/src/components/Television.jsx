@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import YouTube from "react-youtube";
 import { baseURL } from '../locals/constants.js';
 
-const Television = ({channel:channelVideoID, id}) => {
+const Television = ({channel:channelVideoID, id, className}) => {
   const [volume, setVolume] = useState(100);
   const [channel, setChannel] = useState(channelVideoID);
   const [on, setOn] = useState(true);
@@ -12,7 +12,6 @@ const Television = ({channel:channelVideoID, id}) => {
 
   useEffect(() => {
     const opts = {
-      height: '200',
       width: '100%',
       playerVars: {
         // https://developers.google.com/youtube/player_parameters
@@ -65,10 +64,12 @@ const Television = ({channel:channelVideoID, id}) => {
   }
   
   useEffect(() => {
-    if (!player && !channel) {
+    if (!player || !channel) {
       return
     } else {
+      console.log(!player);
       console.log(channel)
+      console.log(player);
       player.loadVideoById(channel);
     }
     
@@ -131,12 +132,12 @@ const Television = ({channel:channelVideoID, id}) => {
   }
   return (
     <>
-        <aside className=' p-4 bg-black md:w-1/2 flex flex-col m-0 mx-auto'>
+        <aside className={className + ' p-4 bg-black md:w-1/2 flex flex-col m-0 mx-auto'}>
 
             {/* Toggles power button background color */}
-            { on ? <YouTube title={channel} videoId={channel} opts={opts} onReady={(event) => setPlayer(event.target)} /> : <div style={{ width: '100%', height: '200px', background: 'gray' }} /> }
+            { on ? <YouTube iframeClassName=' grow' className=' flex flex-col justify-center' title={channel} videoId={channel} opts={opts} onReady={(event) => setPlayer(event.target)} /> : <div style={{ width: '100%', height: '200px', background: 'gray' }} /> }
 
-            <div className=' flex justify-around items-center pt-2 text-xs flex-wrap'>
+            <div className=' flex grow justify-center items-center pt-2 text-xs flex-wrap m-1'>
 
                 <button onClick={volumeUp}>Volume Up</button>
                 <button onClick={volumeDown}>Volume Down</button>
