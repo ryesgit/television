@@ -1,7 +1,11 @@
+import { useState } from 'react'
 import YouTubeEmbed from './YouTubeEmbed.jsx'
 
 const Television = () => {
-
+  const [volume, setVolume] = useState(100);
+  const [channel, setChannel] = useState(0);
+  const [on, setOn] = useState(false);
+  
   return (
     <>
         <aside className=' p-4 bg-black'>
