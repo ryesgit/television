@@ -109,3 +109,11 @@ def decrease_tv_volume(id):
 
     except ValueError:
         return jsonify(f"You can not go under {tv.VOLUME_MIN}!"), 405
+
+@app.route('/televisions/power/<id>')
+def switch_on_off_tv(id):
+    tv: Television
+    tv = televisions[id]
+    tv.switch()
+
+    return jsonify(tv.on), 200

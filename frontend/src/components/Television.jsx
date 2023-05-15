@@ -65,11 +65,11 @@ const Television = ({channel:channelVideoID, id}) => {
   }
   
   useEffect(() => {
-    if (!player) {
+    if (!player && !channel) {
       return
     } else {
       console.log(channel)
-      player.loadVideoById(channel, 5);
+      player.loadVideoById(channel);
     }
     
   }, [channel])
@@ -116,8 +116,19 @@ const Television = ({channel:channelVideoID, id}) => {
         alert(err.toString());
     }
 
+    
   }
+  
+  const switchOnOffTV = async() => {
+    try {
+      const res = await fetch(`${baseURL}/televisions/power/${id}`);
+      const power = await res.json();
 
+      setOn(power);
+    } catch(err) {
+        alert(err.toString());
+    }
+  }
   return (
     <>
         <aside className=' p-4 bg-black md:w-1/2 flex flex-col m-0 mx-auto'>
@@ -126,13 +137,13 @@ const Television = ({channel:channelVideoID, id}) => {
             { on ? <YouTube title={channel} videoId={channel} opts={opts} onReady={(event) => setPlayer(event.target)} /> : <div style={{ width: '100%', height: '200px', background: 'gray' }} /> }
 
             <div className=' flex justify-around items-center pt-2 text-xs flex-wrap'>
-                <p>{channel}</p>
+
                 <button onClick={volumeUp}>Volume Up</button>
                 <button onClick={volumeDown}>Volume Down</button>
                 <button onClick={channelUp}>Channel Up</button>
                 <button onClick={channelDown}>Channel Down</button>
 
-                <label htmlFor="power" className={`${ !on ? 'bg-red-700' : 'bg-green-700' } p-2 rounded-md cursor-pointer`} onClick={() => setOn(!on)}>Power Button</label>
+                <label htmlFor="power" className={`${ !on ? 'bg-red-700' : 'bg-green-700' } p-2 rounded-md cursor-pointer`} onClick={switchOnOffTV}>Power Button</label>
                 <input type="checkbox" name="power-button" id="power" className=" appearance-none"/>
             </div>
 
