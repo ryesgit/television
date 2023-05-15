@@ -37,6 +37,7 @@ class Television:
         self.channel = channel
         self.volume_level = volume_level
         self.on = on
+        self.id = id
     
     def switch(self) -> None:
         self.on = not self.on
