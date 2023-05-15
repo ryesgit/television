@@ -5,7 +5,7 @@ import YouTube from "react-youtube";
 const Television = () => {
   const [volume, setVolume] = useState(100);
   const [channel, setChannel] = useState('LaBY6Jdhu5Q');
-  const [on, setOn] = useState(false);
+  const [on, setOn] = useState(true);
   const [opts, setOpts] = useState({});
   useEffect(() => {
     const opts = {
@@ -24,7 +24,9 @@ const Television = () => {
   return (
     <>
         <aside className=' p-4 bg-black'>
-            <YouTube videoId={channel} opts={opts}/>
+
+            {/* Toggles power button background color */}
+            { on ? <YouTube videoId={channel} opts={opts}/> : <div style={{ width: '100%', height: '390px', background: 'gray' }} /> }
 
             <div className=' flex justify-around items-center pt-2'>
                 <button>Volume Up</button>
@@ -32,7 +34,7 @@ const Television = () => {
                 <button>Channel Up</button>
                 <button>Channel Down</button>
 
-                <label htmlFor="power" className=" bg-red-700 p-2 rounded-md cursor-pointer">Power Button</label>
+                <label htmlFor="power" className={`${ !on ? 'bg-red-700' : 'bg-green-700' } p-2 rounded-md cursor-pointer`} onClick={() => setOn(!on)}>Power Button</label>
                 <input type="checkbox" name="power-button" id="power" className=" appearance-none"/>
             </div>
 
