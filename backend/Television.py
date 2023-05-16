@@ -46,7 +46,13 @@ class Television:
         return f"This TV's channel is on {self.channel}; volume level is at {self.volume_level}; and TV state is {'on' if self.on else 'off'}"
 
     def get_channel(self) -> int:
-        return [self.channel, self.CHANNELS[self.channel - 1]]
+        if self.channel < len(self.CHANNELS):
+            videoID = self.CHANNELS[self.channel - 1]
+        else:
+            videoID = self.CHANNELS[self.channel % len(self.CHANNELS)]
+        
+
+        return [self.channel, videoID]
     
     def set_channel(self, channel:int) -> None:
         try:
@@ -75,6 +81,8 @@ class Television:
         self.channel += self.CHANNEL_DELTA
 
     def channel_down(self) -> None:
+        if (self.channel - 1 < self.CHANNEL_MIN):
+            raise ValueError("You have reached end of the channels")
         self.channel -= self.CHANNEL_DELTA
 
     def volume_up(self) -> None:

@@ -79,7 +79,7 @@ def decrease_tv_channel(id):
 
         return jsonify(tv.get_channel()), 200
 
-    except IndexError:
+    except ValueError:
         return jsonify(f"You can not go past down {tv.CHANNEL_MIN}!"), 405
 
 @app.route('/televisions/volume/<id>/up')
