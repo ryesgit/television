@@ -11,7 +11,7 @@ Accepts three arguments:
 
 class Television:
     # Just some random YouTube video IDs to be used as "channels"
-    CHANNELS = ['dQw4w9WgXcQ', 'djV11Xbc914', 'g5hdwHlCB9U', 'm9qdS4SeRHE', 'b3g4n0tPpHo', 'dQw4w9WgXcQ', 'djV11Xbc914', 'g5hdwHlCB9U', 'm9qdS4SeRHE', 'b3g4n0tPpHo']
+    CHANNELS = ['qM_yl1Hzwi8', 'WEOyI6QtjkE', 'g5hdwHlCB9U', 'NRQsArDlI_Q', '5GKQ4B76CO8', 'e6Cw1Ux8wVg', 'q9mI38_Qq5U', 'g5hdwHlCB9U', 'm9qdS4SeRHE', 'b3g4n0tPpHo']
     CHANNEL_DELTA = 1
     VOLUME_DELTA = 10
 

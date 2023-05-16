@@ -17,7 +17,8 @@ const Television = ({channel:channelVideoID, id, className, on: tvInitialOnState
       playerVars: {
         // https://developers.google.com/youtube/player_parameters
         autoplay: 1,
-        mute: 1
+        mute: 1,
+        controls: 0
       },
     }
 
@@ -161,7 +162,7 @@ const Television = ({channel:channelVideoID, id, className, on: tvInitialOnState
         <aside className={className + `relative p-4 bg-black md:w-1/2 flex z-0 flex-col m-0 mx-auto`}>
             <p className='absolute z-10 text-white bg-black'>{info}</p>
             {/* Toggles power button background color */}
-            { on ? <YouTube iframeClassName=' grow' className=' flex flex-col justify-center' title={channel} videoId={channel} opts={opts} onReady={(event) => setPlayer(event.target)} /> : <div className=' grow h-60' style={{ width: '100%', background: 'gray' }} /> }
+            { on ? <YouTube iframeClassName=' grow' className=' flex flex-col justify-center' videoId={channel} opts={opts} onReady={(event) => setPlayer(event.target)} /> : <div className=' grow h-60' style={{ width: '100%', background: 'gray' }} /> }
 
             <div className=' flex grow justify-center items-center pt-2 text-xs flex-wrap m-1'>
 
