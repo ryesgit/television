@@ -123,4 +123,42 @@ def brief(id):
     # Gets the tv information
     info = tv.tv()
 
-    return jsonify(info), 200 
+    return jsonify(info), 200
+
+@app.route('/televisions/channel/<id>/set', methods=['POST'])
+def set_tv_channel(id):
+    try:
+        req_body = request.json
+        channel = req_body.get('channel')
+
+        print(id)
+        tv: Television
+        tv = televisions[id]
+        tv.set_channel(int(channel))
+
+        return jsonify(tv.get_channel()), 200
+
+    except IndexError:
+        return jsonify(f"You can not go past over {tv.CHANNEL_MAX}!"), 405
+    
+    except ValueError:
+        return jsonify(f"Channel value must be an integer!"), 405
+
+@app.route('/televisions/volume/<id>/set', methods=['POST'])
+def set_tv_volume(id):
+    try:
+        req_body = request.json
+        volume = req_body.get('volume')
+
+        print(id)
+        tv: Television
+        tv = televisions[id]
+        tv.set_volume_level(int(volume))
+
+        return jsonify(tv.get_volume_level()), 200
+
+    except IndexError:
+        return jsonify(f"You can not go past over {tv.VOLUME_MAX} or below {tv.VOLUME_MIN}!"), 405
+    
+    except ValueError:
+        return jsonify(f"Volume value must be an integer that is a multiple of 10!"), 405

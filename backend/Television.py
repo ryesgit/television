@@ -16,7 +16,7 @@ class Television:
     VOLUME_DELTA = 10
 
     # Volume and channel minimum and maximum
-    CHANNEL_MAX = 10
+    CHANNEL_MAX = 120
     CHANNEL_MIN = 1
 
     VOLUME_MAX = 100
