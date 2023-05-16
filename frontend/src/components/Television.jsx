@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react'
 import YouTube from "react-youtube";
 import { baseURL } from '../locals/constants.js';
 
-const Television = ({channel:channelVideoID, id, className, on: tvInitialOnState}) => {
-  const [volume, setVolume] = useState(100);
+const Television = ({channel:channelVideoID, id, className, on: tvInitialOnState, volume: tvInitialVolume}) => {
+  const [volume, setVolume] = useState(tvInitialVolume);
   const [channel, setChannel] = useState(channelVideoID);
   const [on, setOn] = useState(tvInitialOnState);
   const [opts, setOpts] = useState({});

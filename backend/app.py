@@ -18,10 +18,6 @@ CORS(app)
 
 televisions = {}
 
-# Mock television instance creation for now
-tv_one = Television(5, 10, True, 'one')
-print(tv_one)
-televisions[tv_one.id] = tv_one
 
 @app.route('/')
 def hello():

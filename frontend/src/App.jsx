@@ -30,7 +30,7 @@ function App() {
         <div className=' flex w-4/5 gap-2'>
           {
             televisions.map(television => {
-              return <Television className=" aspect-video" channel={television.channel[1]} id={television.id} key={television.id} on={television.on}/>
+              return <Television className=" aspect-video" channel={television.channel[1]} id={television.id} key={television.id} on={television.on} volume={television.volume_level}/>
             })
           }
         </div>
